@@ -39,6 +39,7 @@
 
 ;;; Code:
 
+(require 'subr-x)
 (require 'biblio-core)
 (eval-when-compile
   (require 'cl))
