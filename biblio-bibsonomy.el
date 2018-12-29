@@ -90,6 +90,7 @@ COMMAND, ARG, MORE: See `biblio-backends'."
   "Parse a single bibtex entry and advance to the next line.
 Each bibtex entry is automatically formatted using the user-defined
 styles customized in the `bibtex' and `bibtex-autokey' groups."
+  (bibtex-set-dialect 'biblatex t)
   (let ((start-point (point))
         (bibtex-string)
         (bibtex-expand-strings t)
