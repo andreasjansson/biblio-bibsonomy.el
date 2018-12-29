@@ -11,6 +11,10 @@
 
 (require 'biblio-core)
 
+(defgroup biblio-bibsonomy nil
+  "Bibsonomy support in biblio.el"
+  :group 'biblio)
+
 (defcustom biblio-bibsonomy-username nil
   "Username for Bibsonomy API."
   :group 'biblio-bibsonomy
@@ -84,4 +88,16 @@ COMMAND, ARG, MORE: See `biblio-backends'."
   (let-alist metadata
     (funcall forward-to .bibtex)))
 
+(add-to-list 'biblio-backends #'biblio-bibsonomy-backend)
+
+;;;###autoload
+(add-hook 'biblio-init-hook #'biblio-bibsonomy-backend)
+
+;;;###autoload
+(defun biblio-bibsonomy-lookup (&optional query)
+  "Start an Bibsonomy search for QUERY, prompting if needed."
+  (interactive)
+  (biblio-lookup #'biblio-bibsonomy-backend query))
+
+(provide 'biblio-bibsonomy)
 ;;; biblio-bibsonomy.el ends here
