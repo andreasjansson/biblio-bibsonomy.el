@@ -123,7 +123,6 @@ Used after parsing all bibtex entries."
 (defun biblio-bibsonomy--parse-search-results ()
   "Extract search results from Bibsonomy response."
   (biblio-decode-url-buffer 'utf-8)
-  ; TODO: handle HTTP, auth, and other failures
   (loop with entry
         do (setq entry (biblio-bibsonomy--parse-entry))
         when (not entry)
