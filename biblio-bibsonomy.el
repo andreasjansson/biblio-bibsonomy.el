@@ -1,12 +1,12 @@
-;;; biblio-bibsonomy.el --- Lookup and import bibliographic entries from Bibsonomy -*- lexical-binding: t -*-
+;;; biblio-bibsonomy.el --- Lookup bibliographic entries from Bibsonomy -*- lexical-binding: t -*-
 
 ;; Copyright (C) 2018 Andreas Jansson and contributors
 ;;
 ;; Author: Andreas Jansson and contributors
 ;; URL: http://github.com/andreasjansson/biblio-bibsonomy/
-;; Package-Requires: ((emacs "24") (biblio-core "0.2"))
+;; Package-Requires: ((emacs "24.4") (biblio-core "0.2"))
 ;; Version: 1.0
-;; Keywords: bibliography, bibtex, bibsonomy
+;; Keywords: bib, tex, bibsonomy
 
 ;; This file is not part of GNU Emacs.
 
