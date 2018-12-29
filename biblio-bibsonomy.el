@@ -124,7 +124,8 @@ Used after parsing all bibtex entries."
   "Extract search results from Bibsonomy response."
   (biblio-decode-url-buffer 'utf-8)
   ; TODO: handle HTTP, auth, and other failures
-  (loop do (setq entry (biblio-bibsonomy--parse-entry))
+  (loop with entry
+        do (setq entry (biblio-bibsonomy--parse-entry))
         when (not entry)
         return (or (biblio-bibsonomy--error-if-remaining-text) entries)
         collect entry into entries))
