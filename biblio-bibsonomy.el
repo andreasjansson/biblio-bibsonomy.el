@@ -1,11 +1,40 @@
 ;;; biblio-bibsonomy.el --- Lookup and import bibliographic entries from Bibsonomy -*- lexical-binding: t -*-
 
+;; Copyright (C) 2018 Andreas Jansson and contributors
+;;
+;; Author: Andreas Jansson and contributors
+;; URL: http://github.com/andreasjansson/biblio-bibsonomy/
+;; Package-Requires: ((emacs "24") (biblio-core "0.2"))
+;; Version: 1.0
+;; Keywords: bibliography, bibtex, bibsonomy
+
+;; This file is not part of GNU Emacs.
+
+;;; License:
+
+;; Licensed under the same terms as Emacs.
+
 ;;; Commentary:
 ;;
-;; Lookup and download bibliographic records from Bibsonomy.  Requires
-;; a valid Bibsonomy username API key (set in the
-;; `biblio-bibsonomy-username' and `biblio-bibsonomy-api-key'
-;; variables).
+;; Lookup and download bibliographic records from Bibsonomy.
+;;
+;; Installation:
+;;
+;;   1. Install biblio.el (`M-x package-install` biblio.el)
+;;   2. Install biblio-bibsonomy.el
+;;   3. Create an account on www.bibsonomy.org
+;;   4. In the Settings tab of the account page, find your API key under the API heading
+;;   5. Set the following variables in your Emacs init file:
+;;
+;;      (require 'biblio-bibsonomy)
+;;
+;;      (setq
+;;       biblio-bibsonomy-api-key "my-api-key"
+;;       biblio-bibsonomy-username "my-user-name")
+;;
+;; Usage:
+;;
+;;   M-x biblio-lookup
 
 ;;; Code:
 
