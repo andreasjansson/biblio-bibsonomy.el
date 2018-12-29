@@ -97,8 +97,6 @@ styles customized in the `bibtex' and `bibtex-autokey' groups."
         (bibtex-entry-format (remove 'required-fields bibtex-entry-format))
         (bibtex-entry (bibtex-parse-entry t)))
     (when bibtex-entry
-      (bibtex-clean-entry t t)
-      (setq bibtex-entry (bibtex-parse-entry t)) ; re-parse post clean
       (setq bibtex-string (buffer-substring-no-properties
                            start-point (1+ (point))))
       (forward-line)
@@ -134,7 +132,7 @@ Used after parsing all bibtex entries."
 (defun biblio-bibsonomy--forward-bibtex (metadata forward-to)
   "Forward BibTeX for Bibsonomy entry METADATA to FORWARD-TO."
   (let-alist metadata
-    (funcall forward-to .bibtex)))
+    (funcall forward-to (biblio-format-bibtex .bibtex t))))
 
 (add-to-list 'biblio-backends #'biblio-bibsonomy-backend)
 
