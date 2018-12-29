@@ -10,6 +10,7 @@
 ;;; Code:
 
 (require 'biblio-core)
+(require 'cl)
 
 (defgroup biblio-bibsonomy nil
   "Bibsonomy support in biblio.el"
@@ -41,6 +42,10 @@ COMMAND, ARG, MORE: See `biblio-backends'."
 
 (defun biblio-bibsonomy--url (query)
   "Create a Bibsonomy url to look up QUERY."
+
+  (unless (and biblio-bibsonomy-username biblio-bibsonomy-api-key)
+    (user-error "The variables `biblio-bibsonomy-username' and `biblio-bibsonomy-api-key' are not defined.\n\nDefine them with:\nM-x customize-group biblio-bibsonomy"))
+
   (format "https://%s:%s@%s/posts?resourcetype=bibtex&format=bibtex&search=%s"
           biblio-bibsonomy-username biblio-bibsonomy-api-key
           biblio-bibsonomy--api-url-root (url-encode-url query)))
@@ -50,15 +55,18 @@ COMMAND, ARG, MORE: See `biblio-backends'."
   (mapcar #'(lambda (x) (cons (intern (car x)) (cdr x))) alist))
 
 (defun biblio-bibsonomy--parse-entry ()
-  "Parse a single bibtex entry and advance to the next line."
+  "Parse a single bibtex entry and advance to the next line.
+Each bibtex entry is automatically formatted using the user-defined
+styles customized in the `bibtex' and `bibtex-autokey' groups."
   (let ((start-point (point))
         (bibtex-string)
         (bibtex-expand-strings t)
         (bibtex-autokey-edit-before-use nil)
+        (bibtex-entry-format (remove 'required-fields bibtex-entry-format))
         (bibtex-entry (bibtex-parse-entry t)))
     (when bibtex-entry
-      (bibtex-clean-entry t)
-      (setq bibtex-entry (bibtex-parse-entry t))  ; re-parse post clean
+      (bibtex-clean-entry t t)
+      (setq bibtex-entry (bibtex-parse-entry t)) ; re-parse post clean
       (setq bibtex-string (buffer-substring-no-properties
                            start-point (1+ (point))))
       (forward-line)
@@ -66,7 +74,7 @@ COMMAND, ARG, MORE: See `biblio-backends'."
         (list (cons 'doi .doi)
               (cons 'bibtex bibtex-string)
               (cons 'title (format "%s (%s)" .title .year))
-              (cons 'authors (s-split " and " .author))
+              (cons 'authors (split-string " and " .author))
               (cons 'publisher .publisher)
               (cons 'container .journal)
               (cons 'type .=type=)
@@ -74,13 +82,20 @@ COMMAND, ARG, MORE: See `biblio-backends'."
               (cons 'direct-url .url)))
       )))
 
+(defun biblio-bibsonomy--error-if-remaining-text ()
+  "Raise error if there is remaining text in the buffer.
+Used after parsing all bibtex entries."
+  (let ((remaining-text (buffer-substring-no-properties (point) (point-max))))
+   (unless (string-blank-p remaining-text)
+     (error "Bibsonomy returned error: %s" remaining-text))))
+
 (defun biblio-bibsonomy--parse-search-results ()
   "Extract search results from Bibsonomy response."
   (biblio-decode-url-buffer 'utf-8)
   ; TODO: handle HTTP, auth, and other failures
   (loop do (setq entry (biblio-bibsonomy--parse-entry))
         when (not entry)
-        return entries
+        return (or (biblio-bibsonomy--error-if-remaining-text) entries)
         collect entry into entries))
 
 (defun biblio-bibsonomy--forward-bibtex (metadata forward-to)
