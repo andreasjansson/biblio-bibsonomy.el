@@ -108,8 +108,7 @@ COMMAND, ARG, MORE: See `biblio-backends'."
               (cons 'container .journal)
               (cons 'type .=type=)
               (cons 'url .url)
-              (cons 'direct-url .url)))
-      )))
+              (cons 'direct-url .url))))))
 
 (defun biblio-bibsonomy--error-if-remaining-text ()
   "Raise error if there is remaining text in the buffer.
