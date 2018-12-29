@@ -87,9 +87,7 @@ COMMAND, ARG, MORE: See `biblio-backends'."
   (mapcar #'(lambda (x) (cons (intern (car x)) (cdr x))) alist))
 
 (defun biblio-bibsonomy--parse-entry ()
-  "Parse a single bibtex entry and advance to the next line.
-Each bibtex entry is automatically formatted using the user-defined
-styles customized in the `bibtex' and `bibtex-autokey' groups."
+  "Parse a single bibtex entry and advance to the next line."
   (bibtex-set-dialect 'BibTeX t)
   (let ((start-point (point))
         (bibtex-string)
@@ -130,7 +128,7 @@ Used after parsing all bibtex entries."
         collect entry into entries))
 
 (defun biblio-bibsonomy--forward-bibtex (metadata forward-to)
-  "Forward BibTeX for Bibsonomy entry METADATA to FORWARD-TO."
+  "Forward auto-formatted BibTeX for Bibsonomy entry METADATA to FORWARD-TO."
   (let-alist metadata
     (funcall forward-to (biblio-format-bibtex .bibtex t))))
 
