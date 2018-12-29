@@ -40,7 +40,8 @@
 ;;; Code:
 
 (require 'biblio-core)
-(require 'cl)
+(eval-when-compile
+  (require 'cl))
 
 (defgroup biblio-bibsonomy nil
   "Bibsonomy support in biblio.el"
