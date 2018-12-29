@@ -25,16 +25,16 @@ M-x biblio-lookup
 
 First, select the Bibsonomy backend (biblio-bibsonomy.el automatically adds the Bibsonomy backend to biblio.el).
 
-[screenshot 1](https://raw.githubusercontent.com/andreasjansson/biblio-bibsonomy/master/readme-assets/screenshot-1.png)
+![screenshot 1](https://raw.githubusercontent.com/andreasjansson/biblio-bibsonomy/master/readme-assets/screenshot-1.png)
 
 Then, type in your search query.
 
-[screenshot 2](https://raw.githubusercontent.com/andreasjansson/biblio-bibsonomy/master/readme-assets/screenshot-2.png)
+![screenshot 2](https://raw.githubusercontent.com/andreasjansson/biblio-bibsonomy/master/readme-assets/screenshot-2.png)
 
 In the list of results, type `C` to copy the bibtex entry to the kill ring and close the buffer.
 
-[screenshot 3](https://raw.githubusercontent.com/andreasjansson/biblio-bibsonomy/master/readme-assets/screenshot-3.png)
+![screenshot 3](https://raw.githubusercontent.com/andreasjansson/biblio-bibsonomy/master/readme-assets/screenshot-3.png)
 
 Finally, yank the bibtex entry into your bibliography buffer.
 
-[screenshot 4](https://raw.githubusercontent.com/andreasjansson/biblio-bibsonomy/master/readme-assets/screenshot-4.png)
+![screenshot 4](https://raw.githubusercontent.com/andreasjansson/biblio-bibsonomy/master/readme-assets/screenshot-4.png)
