@@ -138,7 +138,7 @@ Used after parsing all bibtex entries."
 
 ;;;###autoload
 (defun biblio-bibsonomy-lookup (&optional query)
-  "Start an Bibsonomy search for QUERY, prompting if needed."
+  "Start a Bibsonomy search for QUERY, prompting if needed."
   (interactive)
   (biblio-lookup #'biblio-bibsonomy-backend query))
 
