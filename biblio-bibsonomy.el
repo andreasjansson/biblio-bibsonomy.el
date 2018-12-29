@@ -74,7 +74,6 @@ COMMAND, ARG, MORE: See `biblio-backends'."
 
 (defun biblio-bibsonomy--url (query)
   "Create a Bibsonomy url to look up QUERY."
-
   (unless (and biblio-bibsonomy-username biblio-bibsonomy-api-key)
     (user-error "The variables `biblio-bibsonomy-username' and `biblio-bibsonomy-api-key' are not defined.\n\nDefine them with:\nM-x customize-group biblio-bibsonomy"))
 
