@@ -102,7 +102,7 @@ COMMAND, ARG, MORE: See `biblio-backends'."
         (list (cons 'doi .doi)
               (cons 'bibtex bibtex-string)
               (cons 'title (format "%s (%s)" .title .year))
-              (cons 'authors (split-string " and " .author))
+              (cons 'authors (split-string .author " and "))
               (cons 'publisher .publisher)
               (cons 'container .journal)
               (cons 'type .=type=)
