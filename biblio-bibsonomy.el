@@ -70,7 +70,7 @@ COMMAND, ARG, MORE: See `biblio-backends'."
     (`url (biblio-bibsonomy--url arg))
     (`parse-buffer (biblio-bibsonomy--parse-search-results))
     (`forward-bibtex (biblio-bibsonomy--forward-bibtex arg (car more)))
-    (`register (add-to-list 'biblio-backends #'biblio-dblp-backend))))
+    (`register (add-to-list 'biblio-backends #'biblio-bibsonomy-backend))))
 
 (defun biblio-bibsonomy--url (query)
   "Create a Bibsonomy url to look up QUERY."
