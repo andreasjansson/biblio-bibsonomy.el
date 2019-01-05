@@ -41,8 +41,7 @@
 
 (require 'subr-x)
 (require 'biblio-core)
-(eval-when-compile
-  (require 'cl))
+(require 'cl-lib)
 
 (defgroup biblio-bibsonomy nil
   "Bibsonomy support in biblio.el"
@@ -119,7 +118,7 @@ Used after parsing all bibtex entries."
 (defun biblio-bibsonomy--parse-search-results ()
   "Extract search results from Bibsonomy response."
   (biblio-decode-url-buffer 'utf-8)
-  (loop with entry
+  (cl-loop with entry
         do (setq entry (biblio-bibsonomy--parse-entry))
         when (not entry)
         return (or (biblio-bibsonomy--error-if-remaining-text) entries)
@@ -129,8 +128,6 @@ Used after parsing all bibtex entries."
   "Forward auto-formatted BibTeX for Bibsonomy entry METADATA to FORWARD-TO."
   (let-alist metadata
     (funcall forward-to (biblio-format-bibtex .bibtex t))))
-
-(add-to-list 'biblio-backends #'biblio-bibsonomy-backend)
 
 ;;;###autoload
 (add-hook 'biblio-init-hook #'biblio-bibsonomy-backend)
