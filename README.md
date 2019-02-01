@@ -4,8 +4,7 @@
 
 ## Installation
 
-1. Install [biblio.el](https://github.com/cpitclaudel/biblio.el), e.g. from MELPA (`M-x package-install` biblio.el)
-1. Download [biblio-bibsonomy.el](https://raw.githubusercontent.com/andreasjansson/biblio-bibsonomy.el/master/biblio-bibsonomy.el) to your Emacs load path
+1. `M-x package-install biblio-bibsonomy` (assuming MELPA is [in your `package-archives`](https://melpa.org/#/getting-started)).
 1. Create an account on [www.bibsonomy.org](https://www.bibsonomy.org)
 1. In the [Settings tab of the account page](https://www.bibsonomy.org/settings?selTab=1#selTab1), find your API key under the API heading
 1. Set the following variables in your Emacs init file:
